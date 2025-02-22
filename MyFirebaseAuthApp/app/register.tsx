@@ -70,7 +70,7 @@ export default function RegisterScreen() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       Alert.alert('Success', 'Account created successfully');
-      router.push('/'); // ✅ Navigate to Login after registration
+      router.push('./login'); // ✅ Navigate to Login after registration
     } catch (error: any) {
       Alert.alert('Registration Failed', error.message);
     }
