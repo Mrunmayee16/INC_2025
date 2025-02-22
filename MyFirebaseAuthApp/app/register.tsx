@@ -12,7 +12,7 @@
 //   const handleRegister = async () => {
 //     try {
 //       await createUserWithEmailAndPassword(auth, email, password);
-//       router.replace('/'); // ✅ Navigate to Home after successful registration
+//       router.replace('./login'); // ✅ Navigate to Home after successful registration
 //     } catch (error) {
 //       Alert.alert('Registration Error', (error as Error).message);
 //     }
