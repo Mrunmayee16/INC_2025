@@ -1,57 +1,5 @@
-// import React, { useState } from 'react';
-// import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { auth } from '@/firebaseConfig';
-// import { useRouter } from 'expo-router';
-
-// export default function RegisterScreen() {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const router = useRouter();
-
-//   const handleRegister = async () => {
-//     try {
-//       await createUserWithEmailAndPassword(auth, email, password);
-//       router.replace('./login'); // ✅ Navigate to Home after successful registration
-//     } catch (error) {
-//       Alert.alert('Registration Error', (error as Error).message);
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Register</Text>
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Email"
-//         value={email}
-//         onChangeText={setEmail}
-//         keyboardType="email-address"
-//       />
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Password"
-//         secureTextEntry
-//         value={password}
-//         onChangeText={setPassword}
-//       />
-//       <Button title="Register" onPress={handleRegister} />
-//       <Text style={styles.link} onPress={() => router.push('/login')}>
-//         Already have an account? Login here
-//       </Text>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, justifyContent: 'center', padding: 16 },
-//   title: { fontSize: 32, marginBottom: 16, textAlign: 'center' },
-//   input: { borderWidth: 1, borderColor: '#ccc', padding: 12, marginBottom: 12, borderRadius: 8 },
-//   link: { color: 'blue', marginTop: 16, textAlign: 'center' },
-// });
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebaseConfig'; // 🔥 Ensure this path is correct
@@ -79,34 +27,48 @@ export default function RegisterScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#888"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#888"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        placeholderTextColor="#888"
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-      />
-      <Button title="Register" onPress={handleRegister} />
-      <TouchableOpacity onPress={() => router.push('/')}>
-        <Text style={styles.link}>Already have an account? Login here</Text>
-      </TouchableOpacity>
+      
+      <View style={styles.formContainer}>
+        <Text style={styles.subtitle}>Email</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
+
+        <Text style={styles.subtitle}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+
+        <Text style={styles.subtitle}>Confirm Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm your password"
+          secureTextEntry
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+
+        <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.footerContainer}>
+        <Text>
+          Already have an account?{' '}
+          <Text style={styles.link} onPress={() => router.push('/')}>
+            Login here
+          </Text>
+        </Text>
+      </View>
     </View>
   );
 }
@@ -115,7 +77,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    alignItems: 'center',
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
   title: {
@@ -124,18 +87,45 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#000',
   },
+  formContainer: {
+    width: '100%',
+    marginBottom: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 8,
+    color: '#333',
+  },
   input: {
-    borderWidth: 1,
+    height: 40,
     borderColor: '#ccc',
-    padding: 12,
-    marginBottom: 12,
+    borderWidth: 1,
     borderRadius: 8,
-    color: '#000',
-    backgroundColor: '#f9f9f9',
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  registerButton: {
+    backgroundColor: '#B4A7D6',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+    elevation: 3, // For shadow effect on Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   link: {
     color: 'blue',
-    marginTop: 16,
-    textAlign: 'center',
+  },
+  footerContainer: {
+    marginTop: 20,
+    alignItems: 'center',
   },
 });

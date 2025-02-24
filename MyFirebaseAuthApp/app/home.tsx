@@ -42,11 +42,13 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🎉 Welcome to the App!</Text>
+      
       <Text style={styles.subtitle}>Logged in as: {user?.email}</Text>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
+    
   );
 }
 
@@ -57,6 +59,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
+  },
+  description: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 30,
   },
   title: {
     fontSize: 28,
