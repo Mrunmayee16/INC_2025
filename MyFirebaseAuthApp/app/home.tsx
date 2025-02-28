@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { getAuth, signOut, User } from 'firebase/auth';
-import { router } from 'expo-router';
+import { router } from 'expo-router'; // Import the router for navigation
 
 export default function HomeScreen() {
   const [user, setUser] = useState<User | null>(null);
@@ -31,6 +31,10 @@ export default function HomeScreen() {
     }
   };
 
+  const navigateToTodoList = () => {
+    router.push('/TodoList'); // Navigate to the Todo List screen (assuming it's /todo route)
+  };
+
   if (loading) {
     return (
       <View style={styles.container}>
@@ -42,13 +46,18 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🎉 Welcome to the App!</Text>
-      
       <Text style={styles.subtitle}>Logged in as: {user?.email}</Text>
+
+      {/* Button to access the To-Do List */}
+      <TouchableOpacity style={styles.button} onPress={navigateToTodoList}>
+        <Text style={styles.buttonText}>Go to To-Do List</Text>
+      </TouchableOpacity>
+
+      {/* Logout Button */}
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
-    
   );
 }
 
@@ -81,6 +90,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,
+    marginVertical: 10, // Added margin between buttons
   },
   buttonText: {
     color: '#fff',
