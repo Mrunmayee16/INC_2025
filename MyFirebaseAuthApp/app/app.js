@@ -16,16 +16,78 @@
 //       </Stack.Navigator>
 //     </NavigationContainer>
 //   );
+// // }
+
+// import React from 'react';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// //import HomeScreen from './app/(tabs)/index';
+// //import ExploreScreen from './app/(tabs)/explore';
+// import LoginScreen from './Screens/LoginScreen';
+// import SignupScreen from './Screens/SignupScreen';
+// import TodoList from './TodoList';
+// import DoctorList from './DoctorList';
+
+
+
+// const Stack = createNativeStackNavigator();
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="Login">
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//         <Stack.Screen name="SignUp" component={SignUpScreen} />
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//         <Stack.Screen name="Explore" component={ExploreScreen} />
+//         <Stack.Screen name="TodoList" component={TodoList} />
+//         <Stack.Screen name="DoctorList" component={DoctorList} />
+     
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
 // }
 
+
+
+// import TodoList from './TodoList';
+// import DoctorList from './DoctorList'; // Ensure correct path
+// import Tips from './Tips'; // Ensure correct path
+// import React from 'react';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import LoginScreen from './Screens/LoginScreen';
+// import SignupScreen from './Screens/SignupScreen';
+// import TipsScreen from './TipsScreen';
+
+
+// const Stack = createNativeStackNavigator();
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="Login">
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//         <Stack.Screen name="SignUp" component={SignupScreen} /> 
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//         <Stack.Screen name="Explore" component={ExploreScreen} />
+//         <Stack.Screen name="TodoList" component={TodoList} />
+//         <Stack.Screen name="DoctorList" component={DoctorList} /> 
+//         <Stack.Screen name="Tips" component={TipsScreen} />
+
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+import TodoList from './TodoList';
+import DoctorList from './DoctorList'; // Ensure correct path
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import HomeScreen from './app/(tabs)/index';
-//import ExploreScreen from './app/(tabs)/explore';
 import LoginScreen from './Screens/LoginScreen';
 import SignupScreen from './Screens/SignupScreen';
-import TodoList from './TodoList';
+import TipsScreen from './Tips'; 
 
 const Stack = createNativeStackNavigator();
 
@@ -34,10 +96,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignUp" component={SignupScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Explore" component={ExploreScreen} />
         <Stack.Screen name="TodoList" component={TodoList} />
+        <Stack.Screen name="DoctorList" component={DoctorList} />
+        <Stack.Screen name="Tips" component={TipsScreen} /> {/* ✅ Added */}
       </Stack.Navigator>
     </NavigationContainer>
   );
