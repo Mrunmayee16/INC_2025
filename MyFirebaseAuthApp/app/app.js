@@ -87,8 +87,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './Screens/LoginScreen';
 import SignupScreen from './Screens/SignupScreen';
-import TipsScreen from './Tips'; 
-
+import Tips from './Tips';
+import Exercise from './Exercise';
+import Music from './Music';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -101,7 +102,10 @@ export default function App() {
         <Stack.Screen name="Explore" component={ExploreScreen} />
         <Stack.Screen name="TodoList" component={TodoList} />
         <Stack.Screen name="DoctorList" component={DoctorList} />
-        <Stack.Screen name="Tips" component={TipsScreen} /> {/* ✅ Added */}
+        <Stack.Screen name="Tips" component={Tips} /> 
+        <Stack.Screen name="Exercise" component={Exercise} />
+        <Stack.Screen name="Music" component={Music} /> 
+
       </Stack.Navigator>
     </NavigationContainer>
   );

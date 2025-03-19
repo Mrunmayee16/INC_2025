@@ -1,11 +1,13 @@
 // import React, { useEffect, useState } from 'react';
 // import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 // import { getAuth, signOut, User } from 'firebase/auth';
-// import { router } from 'expo-router'; // Import the router for navigation
+// import { useNavigation } from '@react-navigation/native'; // Import navigation hook
+// import { router } from 'expo-router'; 
 
 // export default function HomeScreen() {
 //   const [user, setUser] = useState<User | null>(null);
 //   const [loading, setLoading] = useState(true);
+//   const navigation = useNavigation();
 
 //   const auth = getAuth();
 
@@ -14,14 +16,15 @@
 //       if (currentUser) {
 //         setUser(currentUser);
 //       } else {
-//         router.replace('/login'); // Redirect to login if not logged in
+//         navigation.replace('Login'); // Redirect to login if not logged in
 //       }
 //       setLoading(false);
 //     });
 
-//     return unsubscribe; // Cleanup subscription
+//     return unsubscribe;
 //   }, []);
 
+  
 //   const handleLogout = async () => {
 //     try {
 //       await signOut(auth);
@@ -31,40 +34,30 @@
 //     }
 //   };
 
-//   const navigateToTodoList = () => {
-//     router.push('/TodoList'); // Navigate to the Todo List screen (assuming it's /todo route)
-//   };
-//   // const navigateToDoctorList = () => {
-//   //   router.push('/DoctorList'); 
-//   // };
-
-//   if (loading) {
-//     return (
-//       <View style={styles.container}>
-//         <ActivityIndicator size="large" color="#6200ee" />
-//       </View>
-//     );
-//   }
-
 //   return (
-  
 //     <View style={styles.container}>
 //       <Text style={styles.title}>🎉 Welcome to the App!</Text>
 //       <Text style={styles.subtitle}>Logged in as: {user?.email}</Text>
 
 //       {/* Button to access the To-Do List */}
-//       <TouchableOpacity style={styles.button} onPress={navigateToTodoList}>
+//       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TodoList')}>
 //         <Text style={styles.buttonText}>Go to To-Do List</Text>
 //       </TouchableOpacity>
-       
-     
+
+//       {/* Button to access the Doctor List */}
+//       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DoctorList')}>
+//         <Text style={styles.buttonText}>Go to Doctor List</Text>
+//       </TouchableOpacity>
+//       {/* Button to access the Tips*/}
+//       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Tips')}>
+//   <Text style={styles.buttonText}>Go to Tips</Text>
+// </TouchableOpacity>
 
 //       {/* Logout Button */}
 //       <TouchableOpacity style={styles.button} onPress={handleLogout}>
 //         <Text style={styles.buttonText}>Logout</Text>
 //       </TouchableOpacity>
 //     </View>
-    
 //   );
 // }
 
@@ -75,11 +68,6 @@
 //     alignItems: 'center',
 //     padding: 20,
 //     backgroundColor: '#fff',
-//   },
-//   description: {
-//     fontSize: 18,
-//     textAlign: 'center',
-//     marginBottom: 30,
 //   },
 //   title: {
 //     fontSize: 28,
@@ -97,7 +85,7 @@
 //     paddingVertical: 12,
 //     paddingHorizontal: 32,
 //     borderRadius: 8,
-//     marginVertical: 10, // Added margin between buttons
+//     marginVertical: 10,
 //   },
 //   buttonText: {
 //     color: '#fff',
@@ -109,14 +97,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { getAuth, signOut, User } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native'; // Import navigation hook
-import { router } from 'expo-router'; 
+import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-
+  const router = useRouter(); // Added router for navigation fix
   const auth = getAuth();
 
   useEffect(() => {
@@ -132,7 +120,6 @@ export default function HomeScreen() {
     return unsubscribe;
   }, []);
 
-  
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -142,34 +129,47 @@ export default function HomeScreen() {
     }
   };
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🎉 Welcome to the App!</Text>
+      <Text style={styles.title}>Breathe. Focus. Achieve. Welcome to InnerPeace!</Text>
       <Text style={styles.subtitle}>Logged in as: {user?.email}</Text>
 
-      {/* Button to access the To-Do List */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TodoList')}>
-        <Text style={styles.buttonText}>Go to To-Do List</Text>
-      </TouchableOpacity>
+      {/* Button Container for All Buttons */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TodoList')}>
+          <Text style={styles.buttonText}>Go to To-Do List</Text>
+        </TouchableOpacity>
 
-      {/* Button to access the Doctor List */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DoctorList')}>
-        <Text style={styles.buttonText}>Go to Doctor List</Text>
-      </TouchableOpacity>
-      {/* Button to access the Tips*/}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Tips')}>
-  <Text style={styles.buttonText}>Go to Tips</Text>
-</TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DoctorList')}>
+          <Text style={styles.buttonText}>Go to Doctor List</Text>
+        </TouchableOpacity>
 
-      {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Tips')}>
-        <Text style={styles.buttonText}>Go to Tips</Text>
-      </TouchableOpacity> */}
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Tips')}>
+          <Text style={styles.buttonText}>Go to Tips</Text>
+        </TouchableOpacity>
 
+        {/* Added Music and Exercise Buttons */}
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Music')}>
+          <Text style={styles.buttonText}>Go to Music</Text>
+        </TouchableOpacity>
 
-      {/* Logout Button */}
-      <TouchableOpacity style={styles.button} onPress={handleLogout}>
-        <Text style={styles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Exercise')}>
+          <Text style={styles.buttonText}>Go to Exercise</Text>
+        </TouchableOpacity>
+
+        {/* Logout Button */}
+        <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -180,30 +180,50 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 10,
     color: '#333',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
-    marginBottom: 32,
+    color: '#555',
+    marginBottom: 20,
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '100%',
   },
   button: {
-    backgroundColor: '#6200ee',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
+    backgroundColor: '#03DAC5',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 12,
     marginVertical: 10,
+    width: '48%', // Buttons take half width
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 18,
+    color: '#000',
+    fontSize: 16,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+  },
+  logoutButton: {
+    backgroundColor: '#B00020',
   },
 });
-
