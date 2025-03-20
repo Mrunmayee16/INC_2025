@@ -56,6 +56,8 @@ export default function App() {
         <Stack.Screen name="Exercise" component={Exercise} />
         <Stack.Screen name="Music" component={Music} /> 
         <Stack.Screen name="Journal" component={JournalScreen} /> 
+        <Stack.Screen name="AiChat" component={AiChat} options={{ headerShown: false }} />
+
         
 
       </Stack.Navigator>

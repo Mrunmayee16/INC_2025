@@ -1,187 +1,9 @@
-// import React, { useEffect, useState } from 'react';
-// import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
-// import { getAuth, signOut, onAuthStateChanged, User } from 'firebase/auth';
-// import { useNavigation, NavigationProp } from '@react-navigation/native';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-// // Define the type for navigation parameters
-// type RootStackParamList = {
-//   Login: undefined;
-//   TodoList: undefined;
-//   DoctorList: undefined;
-//   Tips: undefined;
-//   Music: undefined;
-//   Exercise: undefined;
-//   AiChat: undefined;
-// };
-
-// type MenuItem = {
-//   title: string;
-//   screen: keyof RootStackParamList;
-// };
-
-// export default function HomeScreen() {
-//   const [user, setUser] = useState<User | null>(null);
-//   const [loading, setLoading] = useState(true);
-//   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-//   const auth = getAuth();
-
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-//       try {
-//         setUser(currentUser);
-//         setLoading(false);
-//         if (!currentUser) {
-//           navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
-//         }
-//       } catch (error) {
-//         console.error('Auth State Change Error:', error);
-//       }
-//     });
-
-//     return unsubscribe;
-//   }, []);
-
-//   const handleLogout = async () => {
-//     try {
-//       await signOut(auth);
-//       navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
-//     } catch (error) {
-//       console.error('Logout Error:', error);
-//     }
-//   };
-
-//   if (loading) {
-//     return (
-//       <View style={styles.container}>
-//         <ActivityIndicator size="large" color="#000" />
-//       </View>
-//     );
-//   }
-
-//   const menuItems: MenuItem[] = [
-//     { title: 'To-Do List', screen: 'TodoList' },
-//     { title: 'Doctor List', screen: 'DoctorList' },
-//     { title: 'Tips', screen: 'Tips' },
-//     { title: 'Music', screen: 'Music' },
-//     { title: 'Exercise', screen: 'Exercise' },
-//     { title: 'Journal', screen: 'Journal' },
-//   ];
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Breathe. Focus. Achieve. Welcome to InnerPeace!</Text>
-//       <Text style={styles.subtitle}>Logged in as: {user?.email || 'Unknown User'}</Text>
-
-//       {/* Grid Menu */}
-//       <FlatList
-//         data={menuItems}
-//         numColumns={2}
-//         contentContainerStyle={styles.gridContainer}
-//         renderItem={({ item }) => (
-//           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate(item.screen)}>
-//             <Text style={styles.buttonText}>{item.title}</Text>
-//           </TouchableOpacity>
-//         )}
-//         keyExtractor={(item) => item.screen}
-//       />
-
-//       {/* Logout Button */}
-//       <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
-//         <Text style={styles.buttonText}>Logout</Text>
-//       </TouchableOpacity>
-
-//       {/* AI Chat Panel */}
-//       <TouchableOpacity style={styles.aiChatPanel} onPress={() => navigation.navigate('AiChat')}>
-//         <MaterialCommunityIcons name="robot" size={24} color="#fff" />
-//         <Text style={styles.aiChatText}>Chat with AI</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     padding: 20,
-//     backgroundColor: '#FFFFFF',
-//   },
-//   title: {
-//     fontSize: 26,
-//     fontWeight: 'bold',
-//     marginBottom: 5,
-//     color: '#333',
-//     textAlign: 'center',
-//   },
-//   subtitle: {
-//     fontSize: 16,
-//     color: '#555',
-//     marginBottom: 20,
-//     textAlign: 'center',
-//     fontStyle: 'italic',
-//   },
-//   gridContainer: {
-//     width: '100%',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   button: {
-//     backgroundColor: '#03DAC5',
-//     paddingVertical: 14,
-//     paddingHorizontal: 20,
-//     borderRadius: 12,
-//     marginVertical: 10,
-//     width: '45%',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     marginHorizontal: '2.5%',
-//     elevation: 3,
-//   },
-//   buttonText: {
-//     color: '#000',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//     textTransform: 'uppercase',
-//     textAlign: 'center',
-//     flexWrap: 'wrap', // Allows long text to wrap instead of cutting off
-//     width: '100%', // Ensures proper spacing inside the button
-//   },
-//   logoutButton: {
-//     backgroundColor: '#B00020',
-//     width: '90%',
-//     marginTop: 20,
-//     marginBottom: 100, // Increased space to avoid overlap
-//   },
-//   aiChatPanel: {
-//     position: 'absolute',
-//     bottom: 20,
-//     width: '90%',
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     backgroundColor: '#6B4EFF',
-//     padding: 15,
-//     borderRadius: 20,
-//     shadowColor: '#000',
-//     shadowOffset: { width: 2, height: 4 },
-//     shadowOpacity: 0.3,
-//     shadowRadius: 4,
-//     elevation: 5,
-//   },
-//   aiChatText: {
-//     color: '#fff',
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//     marginLeft: 10,
-//   },
-// });
-
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { getAuth, signOut, User } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Image } from 'react-native';
 
 export default function HomeScreen() {
   const [user, setUser] = useState<User | null>(null);
@@ -194,22 +16,34 @@ export default function HomeScreen() {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        navigation.replace('Login'); // Redirect to login if not logged in
+        navigation.replace('Login');
       }
       setLoading(false);
     });
-
     return unsubscribe;
   }, []);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigation.replace('Login'); // Redirect to login after logout
+    
+      navigation.popToTop(); // Goes back to the initial screen
+
     } catch (error) {
       console.error('Logout Error:', error);
     }
   };
+
+  const buttons = [
+    { title: 'To-Do List', icon: 'clipboard-list', color: '#FFB74D', screen: 'TodoList' },
+    { title: 'Doctor List', icon: 'doctor', color: '#4DB6AC', screen: 'DoctorList' },
+    { title: 'Tips', icon: 'lightbulb-on', color: '#7986CB', screen: 'Tips' },
+    { title: 'Music', icon: 'music-note', color: '#BA68C8', screen: 'Music' },  
+    { title: 'Exercise', icon: 'run', color: '#64B5F6', screen: 'Exercise' },
+    { title: 'AI Chat', icon: 'robot-outline', color: '#FFD54F', screen: 'AiChat' },
+    { title: 'Journal', icon: 'book-open-variant', color: '#81C784', screen: 'Journal' },
+    { title: 'Quotes', icon: 'star-outline', color: '#F2D16D', screen: 'Quotes' },
+  ];
 
   if (loading) {
     return (
@@ -220,54 +54,86 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Breathe. Focus. Achieve.</Text>
-      <Text style={styles.subtitle}>Welcome to InnerPeace, {user?.email}!</Text>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TodoList')}>
-          <Text style={styles.buttonText}>To-Do List</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DoctorList')}>
-          <Text style={styles.buttonText}>Doctor List</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Tips')}>
-          <Text style={styles.buttonText}>Tips</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Music')}>
-          <Text style={styles.buttonText}>Music</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Exercise')}>
-          <Text style={styles.buttonText}>Exercise</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AiChat')}>
-          <Text style={styles.buttonText}>AI Chat</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Journal')}>
-          <Text style={styles.buttonText}>Journal</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      
+      <View style={styles.container}>
+      <Image source={require('@/assets/images/logo-login.png')}style={styles.reactLogo}/>
+        <Text style={styles.title}>Breathe. Focus. Achieve. 🌿</Text>
+        <Text style={styles.subtitle}>Welcome to InnerPeace, {user?.email}!</Text>
+        <View style={styles.buttonContainer}>
+          {buttons.map((btn, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.button, { backgroundColor: btn.color }]}
+              onPress={() => navigation.navigate(btn.screen)}
+            >
+              <MaterialCommunityIcons name={btn.icon} size={40} color="#FFF" />
+              <Text style={styles.buttonText}>{btn.title}</Text>
+            </TouchableOpacity>
+          ))}
+          <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
+            <MaterialCommunityIcons name="logout" size={40} color="#FFF" />
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20, backgroundColor: '#FFFFFF' },
-  title: { fontSize: 32, fontWeight: 'bold', marginBottom: 10, color: '#333', textAlign: 'center' },
-  subtitle: { fontSize: 16, color: '#555', marginBottom: 20, textAlign: 'center', fontStyle: 'italic' },
-  buttonContainer: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', width: '100%' },
-  button: { backgroundColor: '#03DAC5', paddingVertical: 14, paddingHorizontal: 20, borderRadius: 12, marginVertical: 10, width: '48%', alignItems: 'center' },
-  buttonText: { color: '#000', fontSize: 16, fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' },
-  logoutButton: { backgroundColor: '#B00020' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    color: '#333',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 20,
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
+  button: {
+    width: 120,
+    height: 120,
+    borderRadius: 20,
+    marginVertical: 10,
+    marginHorizontal: '2.5%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  logoutButton: {
+    backgroundColor: '#E57373',
+  },
+  reactLogo: {
+   height: 200,
+   width: 160,
+    marginBottom: 20,
+  },
 });
-
