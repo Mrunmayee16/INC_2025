@@ -1,108 +1,4 @@
-// // import React, { useState } from 'react';
-// // import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Platform } from 'react-native';
-// // import Task from './Screens/task'; // Assuming Task component is created for each task item
-
-// // const TodoList = () => {
-// //   const [task, setTask] = useState<string>(''); // Typed as string
-// //   const [taskItems, setTaskItems] = useState<string[]>([]); // Typed as array of strings
-
-// //   // Add task to the list
-// //   const handleAddTask = () => {
-// //     Keyboard.dismiss();
-// //     if (task) {
-// //       setTaskItems([...taskItems, task]);
-// //       setTask(''); // Reset task input
-// //     }
-// //   };
-
-// //   // Mark task as completed (remove it from the list)
-// //   const completeTask = (index: number) => {
-// //     let itemsCopy = [...taskItems];
-// //     itemsCopy.splice(index, 1);
-// //     setTaskItems(itemsCopy);
-// //   };
-
-// //   return (
-// //     <View style={styles.container}>
-// //       <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
-// //         <View style={styles.tasksWrapper}>
-// //           <Text style={styles.sectionTitle}>Today's Tasks</Text>
-// //           <View style={styles.items}>
-// //             {taskItems.map((item, index) => (
-// //               <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-// //                 <Task text={item} />
-// //               </TouchableOpacity>
-// //             ))}
-// //           </View>
-// //         </View>
-// //       </ScrollView>
-
-// //       {/* Input task */}
-// //       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.writeTaskWrapper}>
-// //         <TextInput
-// //           style={styles.input}
-// //           placeholder="Write a task"
-// //           value={task}
-// //           onChangeText={(text) => setTask(text)}
-// //         />
-// //         <TouchableOpacity onPress={handleAddTask}>
-// //           <View style={styles.addWrapper}>
-// //             <Text style={styles.addText}>+</Text>
-// //           </View>
-// //         </TouchableOpacity>
-// //       </KeyboardAvoidingView>
-// //     </View>
-// //   );
-// // };
-
-// // const styles = StyleSheet.create({
-// //   container: {
-// //     flex: 1,
-// //     backgroundColor: '#E8EAED',
-// //   },
-// //   tasksWrapper: {
-// //     paddingTop: 80,
-// //     paddingHorizontal: 20,
-// //   },
-// //   sectionTitle: {
-// //     fontSize: 24,
-// //     fontWeight: 'bold',
-// //   },
-// //   items: {
-// //     marginTop: 30,
-// //   },
-// //   writeTaskWrapper: {
-// //     position: 'absolute',
-// //     bottom: 60,
-// //     width: '100%',
-// //     flexDirection: 'row',
-// //     justifyContent: 'space-around',
-// //     alignItems: 'center',
-// //   },
-// //   input: {
-// //     paddingVertical: 15,
-// //     paddingHorizontal: 15,
-// //     backgroundColor: '#FFF',
-// //     borderRadius: 60,
-// //     borderColor: '#C0C0C0',
-// //     borderWidth: 1,
-// //     width: 250,
-// //   },
-// //   addWrapper: {
-// //     width: 60,
-// //     height: 60,
-// //     backgroundColor: '#FFF',
-// //     borderRadius: 60,
-// //     justifyContent: 'center',
-// //     alignItems: 'center',
-// //     borderColor: '#C0C0C0',
-// //     borderWidth: 1,
-// //   },
-// //   addText: {},
-// // });
-
-// // export default TodoList;
-
+//working todo list but all users see all data
 
 // import React, { useState, useEffect } from 'react';
 // import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Platform } from 'react-native';
@@ -195,56 +91,97 @@
 // };
 
 // const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: '#E8EAED' },
-//   tasksWrapper: { paddingTop: 80, paddingHorizontal: 20 },
-//   sectionTitle: { fontSize: 24, fontWeight: 'bold' },
-//   items: { marginTop: 30 },
+//   container: { 
+//     flex: 1, 
+//     backgroundColor: "#E3F2FD", // Light blue background for a fresh look
+//   },
+//   tasksWrapper: { 
+//     paddingTop: 80, 
+//     paddingHorizontal: 20 
+//   },
+//   sectionTitle: { 
+//     fontSize: 24, 
+//     fontWeight: "bold", 
+//     color: "#0D47A1", // Deep blue title for contrast
+//   },
+//   items: { 
+//     marginTop: 30 
+//   },
 //   writeTaskWrapper: {
-//     position: 'absolute',
+//     position: "absolute",
 //     bottom: 60,
-//     width: '100%',
-//     flexDirection: 'row',
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
+//     width: "100%",
+//     flexDirection: "row",
+//     justifyContent: "space-around",
+//     alignItems: "center",
 //   },
 //   input: {
 //     paddingVertical: 15,
 //     paddingHorizontal: 15,
-//     backgroundColor: '#FFF',
+//     backgroundColor: "#FFF",
 //     borderRadius: 60,
-//     borderColor: '#C0C0C0',
-//     borderWidth: 1,
+//     borderColor: "#1E88E5", // Blue border for an accent touch
+//     borderWidth: 2,
 //     width: 250,
+//     fontSize: 16,
+//     color: "#0D47A1", // Dark blue text color
 //   },
 //   addWrapper: {
 //     width: 60,
 //     height: 60,
-//     backgroundColor: '#FFF',
+//     backgroundColor: "#1976D2", // Blue add button
 //     borderRadius: 60,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     borderColor: '#C0C0C0',
-//     borderWidth: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     borderColor: "#1565C0", // Slightly darker blue border
+//     borderWidth: 2,
+//     shadowColor: "#000",
+//     shadowOffset: { width: 0, height: 4 },
+//     shadowOpacity: 0.2,
+//     shadowRadius: 5,
+//     elevation: 5, // Smooth elevation for button
 //   },
-//   addText: {},
+//   addText: {
+//     fontSize: 24,
+//     color: "#FFF", // White text for contrast
+//     fontWeight: "bold",
+//   },
 // });
 
 // export default TodoList;
 
 
+
+//working code with every use see only its own data
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Platform } from 'react-native';
-import { database, ref, set, push, remove, onValue } from '../firebaseConfig'; // Import Firebase functions
+import { 
+  KeyboardAvoidingView, 
+  StyleSheet, 
+  Text, 
+  View, 
+  TextInput, 
+  TouchableOpacity, 
+  Keyboard, 
+  ScrollView, 
+  Platform 
+} from 'react-native';
+
+import { database, ref, set, push, remove, onValue } from '../firebaseConfig'; // Firebase imports
+import { getAuth } from "firebase/auth"; // Firebase Authentication
 import Task from './Screens/task'; // Assuming Task component exists
 import { DataSnapshot } from "firebase/database";
 
 const TodoList = () => {
-  const [task, setTask] = useState<string>(''); // Typed as string
-  const [taskItems, setTaskItems] = useState<{ id: string; text: string }[]>([]); // Array of objects [{id, text}]
+  const [task, setTask] = useState<string>(''); 
+  const [taskItems, setTaskItems] = useState<{ id: string; text: string }[]>([]); 
+  const auth = getAuth(); // Firebase authentication
 
-  // Fetch tasks from Firebase when component mounts & listen for changes
+  // Fetch tasks for the logged-in user
   useEffect(() => {
-    const tasksRef = ref(database, 'tasks'); // Reference to "tasks" in DB
+    if (!auth.currentUser) return; // Ensure user is logged in
+
+    const userId = auth.currentUser.uid; // Get the logged-in user's UID
+    const tasksRef = ref(database, `tasks/${userId}`); // Fetch tasks only for this user
 
     const unsubscribe = onValue(tasksRef, (snapshot: DataSnapshot) => {
       if (snapshot.exists()) {
@@ -260,13 +197,14 @@ const TodoList = () => {
     });
 
     return () => unsubscribe(); // Cleanup on unmount
-  }, []);
+  }, [auth.currentUser]);
 
-  // Add task to Firebase and update state immediately
+  // Add task to Firebase under the logged-in user's UID
   const handleAddTask = () => {
     Keyboard.dismiss();
-    if (task.trim()) {
-      const tasksRef = ref(database, 'tasks');
+    if (task.trim() && auth.currentUser) {  
+      const userId = auth.currentUser.uid;
+      const tasksRef = ref(database, `tasks/${userId}`); // Store inside user's node
       const newTaskRef = push(tasksRef);
       const newTask = { id: newTaskRef.key!, text: task };
 
@@ -281,9 +219,12 @@ const TodoList = () => {
     }
   };
 
-  // Remove task from Firebase and update UI immediately
+  // Remove task from Firebase under the logged-in user's UID
   const completeTask = (taskId: string) => {
-    remove(ref(database, `tasks/${taskId}`));
+    if (!auth.currentUser) return; 
+
+    const userId = auth.currentUser.uid;
+    remove(ref(database, `tasks/${userId}/${taskId}`)); // Remove from user's task list
 
     // Update UI instantly
     setTaskItems((prev) => prev.filter((task) => task.id !== taskId));
